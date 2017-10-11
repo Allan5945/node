@@ -3,8 +3,7 @@ const path = require('path');
 module.exports=function (){
     var router=express.Router();
     router.get('/', (req, res)=>{
-        res.redirect('demo.html');
-
+        res.render('index.html');
     });
     return router;
 };
