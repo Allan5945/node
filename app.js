@@ -15,7 +15,7 @@ const consolidate = require('consolidate');
 // 监听端口
 server.listen(80,function () {
     console.log('服务器已经启动》》》》》》》》》》》》》》》》')
-});  // 监听端口号...
+});  // 监听端口号
 
 //1.解析cookie
 server.use(cookieParser('sdfasl43kjoifguokn4lkhoifo4k3'));
