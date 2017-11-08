@@ -3,7 +3,11 @@ const path = require('path');
 module.exports=function (){
     var router=express.Router();
     router.get('/', (req, res)=>{
-        res.render('index.html');
+        if(req.session.name == undefined){
+            res.render('login.html');
+        }else{
+            res.render('index.html');
+        }
     });
     return router;
 };

@@ -3,9 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-nihaoa
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <h3 class="text-center">
+                总学习时间：<span id="time"></span>分钟
+            </h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                       时间
+                    </th>
+                    <th>
+                       时长
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="node">
+                </tbody>
+            </table>
+            <form role="form" class="form-inline">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">这次学习时间</label><input type="number" class="form-control" id="exampleInputEmail1" />
+                </div>
+                <button type="submit" class="btn btn-default" id="dkkk">打卡</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        $.ajax({
+            type:"get",
+            url:"/login/lod",
+            success:function (data) {
+                var node = '',time = 0;
+                data.forEach(function (val) {
+                    node +="<tr><td>"+val.data+"</td><td>"+val.length+"</td></tr>";
+                    time += val.length;
+                });
+                $('#node').html(node);
+                $('#time').html(time);
+            }
+        });
+        $('#dkkk').click(function () {
+            if($('#exampleInputEmail1').val() == ''){return false}
+            var d = new Date();
+            var str = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+            var dt = {
+                time:str,
+                length:$('#exampleInputEmail1').val()
+            }
+            $.ajax({
+                type:"get",
+                url:"/login/add",
+                data:dt,
+                success:function (data) {
+                    console.log(data)
+                }
+            })
+        })
+    })()
+</script>
 </body>
 </html>
